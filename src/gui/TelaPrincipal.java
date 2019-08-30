@@ -20,15 +20,12 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import primitivos.Ponto;
 import utils.AlertaCallback;
 import utils.AlertaPersonalizado;
 
 @SuppressWarnings("restriction")
 public class TelaPrincipal {
 
-	Ponto pontoSelecionado = null;
-	
 	private Stage palco;
 	private MenuBar menu;
 	private Menu desenhoPontoPonto;
@@ -161,7 +158,7 @@ public class TelaPrincipal {
 		});
 
 		Spinner<Integer> diametroLinhas = new Spinner<Integer>();
-		SpinnerValueFactory<Integer> diametros = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 20, 3);
+		SpinnerValueFactory<Integer> diametros = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 20, 2);
 		diametroLinhas.setValueFactory(diametros);
 		diametroLinhas.setMaxWidth(80);
 		diametroLinhas.valueProperty().addListener(e -> {

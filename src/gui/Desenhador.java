@@ -1,17 +1,10 @@
 package gui;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import calculadores.CalculadorGenerico;
 import calculadores.CirculoCalculador;
 import calculadores.RetaCalculador;
-import controladores.TipoDesenho;
-import controladores.TipoPrimitivo;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.paint.Color;
 import primitivos.Circulo;
@@ -26,39 +19,11 @@ public class Desenhador {
 	private Color cor;
 	private int diametro;
 	private Canvas canvas;
-	private Map<TipoPrimitivo, List<Object>> objetosDesenhados;  
-	private Map<TipoPrimitivo, List<Integer>> indicesSelecionados;
-	private Rectangle2D areaRecorte;
 	
 	public Desenhador(Canvas canvas) {
-		this.diametro = 3;
+		this.diametro = 2;
 		this.cor = Color.BLACK;
 		this.canvas = canvas;
-		this.inicilizarEstruturasManipulacaoDeDesenhos();
-	}
-	
-	public Map<TipoPrimitivo, List<Object>> getObjetosDesenhados() {
-		return objetosDesenhados;
-	}
-
-	public void setObjetosDesenhados(Map<TipoPrimitivo, List<Object>> objetosDesenhados) {
-		this.objetosDesenhados = objetosDesenhados;
-	}
-
-	public Map<TipoPrimitivo, List<Integer>> getIndicesObjetosSelecionados() {
-		return indicesSelecionados;
-	}
-
-	public void setIndicesObjetosSelecionados(Map<TipoPrimitivo, List<Integer>> indicesObjetosParaApagar) {
-		this.indicesSelecionados = indicesObjetosParaApagar;
-	}
-	
-	public Rectangle2D getAreaRecorte() {
-		return areaRecorte;
-	}
-
-	public void setAreaRecorte(Rectangle2D areaRecorte) {
-		this.areaRecorte = areaRecorte;
 	}
 	
 	public Color getCor() {
@@ -78,18 +43,6 @@ public class Desenhador {
 
 	public void setDiametro(int diametro) {
 		this.diametro = diametro;
-	}
-
-
-	public void inicilizarEstruturasManipulacaoDeDesenhos(){
-		objetosDesenhados = new HashMap<>();
-		indicesSelecionados = new HashMap<>();
-		List<TipoPrimitivo> listEnum = Arrays.asList(TipoPrimitivo.values());
-		
-		for ( TipoPrimitivo tipoPrimitivo: listEnum) {
-			objetosDesenhados.put(tipoPrimitivo, new ArrayList<>());
-			indicesSelecionados.put(tipoPrimitivo, new ArrayList<>());
-		}
 	}
 	
 	public void desenharReta(Ponto pontoInicial, Ponto pontoFinal, boolean salvar) {
@@ -122,45 +75,4 @@ public class Desenhador {
 		// Desenha o ponto
 		p.desenharPonto(canvas.getGraphicsContext2D());
 	}
-	
-	public void desenharObjetosArmazenados(Color novaCor){
-		// apaga canvas
-		canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-		
-		//desenha todos os objetos
-		objetosDesenhados.forEach((tipoPrimitivo, objetos) -> {
-			for(Object desenho : objetos){
-				//verifica se objeto esta selecionado
-				boolean selecionado = (this.indicesSelecionados.get(tipoPrimitivo).contains(objetos.indexOf(desenho)))
-						? true
-						: false;
-				Color cor;
-				switch (tipoPrimitivo) {
-					case RETA:
-						Reta reta = (Reta) desenho;
-						cor = (selecionado) ? novaCor : reta.getCor() ;
-						this.desenharPontos(RetaCalculador.obterPontosAlgoritmoMidPoint(reta), cor);
-						break;
-					case CIRCULO:
-						Circulo circulo = (Circulo) desenho;
-						cor = (selecionado) ? novaCor : circulo.getCor() ;
-						desenharPontos(CirculoCalculador.obterPontosAlgoritmoMidPoint(circulo), cor );
-						break;
-				}
-			}
-		});
-	}
-	
-	public void limparObjetosSelecionados() {
-		indicesSelecionados.forEach((tipoPrimitivo, indices)->{
-			indices.clear();
-		});
-		desenharObjetosArmazenados(Color.WHITE);
-	}
-	
-	public void salvarObjetoDesenhado(TipoPrimitivo tipoPrimitivo,Object primitivo) {
-		this.objetosDesenhados.get(tipoPrimitivo).add(primitivo);
-	}
-	
-
 }

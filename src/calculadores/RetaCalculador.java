@@ -120,34 +120,4 @@ public class RetaCalculador {
 
 		return pontos;
 	}
-	
-	public static double calcularDistanciaPontoReta(Ponto pt, Reta reta) {
-
-		// Precisa da equa��o da reta
-		/*
-		 * y1 � y2 = a 
-		 * x2 � x1 = b
-		 * x1y2 � x2y1 = c 
-		 * A equa��o geral da reta: ax + by + c = 0 
-		*/
-		double a = reta.getA().gety() - reta.getB().gety();
-		double b = reta.getB().getx() - reta.getA().getx();;
-		double c = (reta.getA().getx()*reta.getB().gety() - (reta.getB().getx()*reta.getA().gety()));
-		
-		// F�rmula de c�lculo da dist�ncia
-		// d = |ax0 + by0 + c| / sqrt(a2 + b2)
-		
-		double distancia = Math.abs((a*pt.getx())+b*pt.gety()+c) / Math.sqrt(Math.pow(a, 2)+Math.pow(b, 2));	
-		return (validaDistanciaPontoSegmentorDeReta(pt, reta)) ? distancia : distancia+10;
-	}
-	
-	// Verifica se ponto pertence a reta mas n�o ao segmento desenhado
-	private static boolean validaDistanciaPontoSegmentorDeReta(Ponto pt, Reta reta) {
-		
-		double tamanhoReta = CalculadorGenerico.obterDistanciaEntreDoisPontos(reta.getA(), reta.getB());
-		double distanciaPontoA = CalculadorGenerico.obterDistanciaEntreDoisPontos(pt, reta.getA());
-		double distanciaPontoB = CalculadorGenerico.obterDistanciaEntreDoisPontos(pt, reta.getB());
-		boolean distanciaValida = (distanciaPontoA > tamanhoReta || distanciaPontoB > tamanhoReta ) ? false : true;		
-		return distanciaValida;
-	}
 }

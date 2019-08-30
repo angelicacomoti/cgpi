@@ -7,23 +7,6 @@ import primitivos.Ponto;
 
 public class CirculoCalculador {
 
-	public static List<Ponto> obterPontos(Circulo circulo) {
-		List<Ponto> pontos = new ArrayList<Ponto>();
-		final int raio = circulo.getRaio();
-		final Ponto pontoOrigem = circulo.getPontoOrigem();
-
-		for (double i = 0; i <= 360; i++) {
-			double angleInRadian = Math.toRadians(i);
-			int x = (int) (raio * Math.cos(angleInRadian));
-			int y = (int) (raio * Math.sin(angleInRadian));
-			x += pontoOrigem.getx();
-			y += pontoOrigem.gety();
-			pontos.add(new Ponto(x, y));
-		}
-
-		return pontos;
-	}
-
 	public static Integer obterRaio(Ponto inicio, Ponto fim) {
 		double equacao = Math.pow((fim.getx() - inicio.getx()), 2) + Math.pow((fim.gety() - inicio.gety()), 2);
 		return (int) Math.floor(Math.sqrt(equacao));
@@ -73,12 +56,5 @@ public class CirculoCalculador {
 		pontos.add(new Ponto(x0 - y, y0 - x));
 		pontos.add(new Ponto(x0 - y, y0 + x));
 		pontos.add(new Ponto(x0 - x, y0 + y));
-	}
-	
-	public static double calcularDistanciaPontoCirculo(Ponto pt, Circulo circulo){
-
-		double distanciaPontoCentroCirculo = CalculadorGenerico.obterDistanciaEntreDoisPontos(pt,circulo.getPontoOrigem());
-		
-		return Math.abs(distanciaPontoCentroCirculo - circulo.getRaio());
 	}
 }

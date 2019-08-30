@@ -30,15 +30,7 @@ public class Circulo implements Serializable {
 	public void setRaio(int raio) {
 		this.raio = raio;
 	}
-	
-	@XmlElement(name = "Raio")
-	public double getRaioNormalizado() {
-		return (this.raio + 0.0) / TelaPrincipal.LARGURA_CANVAS;
-	}
 
-	public void setRaioNormalizado(double raioNormalizado) {
-		this.raio = (int) (raioNormalizado*TelaPrincipal.LARGURA_CANVAS);
-	}
 
 	@XmlElement(name = "Ponto")
 	public Ponto getPontoOrigem() {
@@ -57,11 +49,4 @@ public class Circulo implements Serializable {
 		this.cor = cor;
 	}
 
-	@XmlElement(name = "Cor")
-	public Cor getCustomColor(){
-		return new Cor(this.cor.getRed(), this.cor.getGreen(), this.cor.getBlue());
-	}
-	public void setCustomColor(Cor cor){
-		this.cor = cor.toColor();
-	}
 }

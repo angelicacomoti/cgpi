@@ -1,17 +1,16 @@
 package controladores;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import calculadores.CirculoCalculador;
 import calculadores.CurvaDoDragaoCalculador;
 import calculadores.RetaCalculador;
 import gui.Desenhador;
-import javafx.scene.SnapshotParameters;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
-import javafx.scene.image.WritableImage;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -75,36 +74,6 @@ public class ControladorDeEventos {
 		}
 	}
 	
-	public void onCanvasMousePressedSelecionarPrimitivo(Ponto pontoClicado){
-	
-		// Iterando sobre objetos j� desenhados
-		this.desenhador.getObjetosDesenhados().forEach((tipoPrimitivo, desenhos)->{
-			
-			for(Object desenho : desenhos){
-				double distancia = 0;
-				// calcular distancia do ponto pro objeto
-				switch (tipoPrimitivo) {
-					case RETA:
-						distancia = RetaCalculador.calcularDistanciaPontoReta(pontoClicado, (Reta)desenho);
-						break;
-					case CIRCULO:
-						distancia = CirculoCalculador.calcularDistanciaPontoCirculo(pontoClicado, (Circulo) desenho);
-						break;
-				}
-				//guarda objeto para remo��o posterior
-				if (distancia < 7.00){
-					//verifica se j� n�o existe na lista de remo��o
-					if (!this.desenhador.getIndicesObjetosSelecionados().get(tipoPrimitivo).contains(desenhos.indexOf(desenho))){
-						this.desenhador.getIndicesObjetosSelecionados().get(tipoPrimitivo).add(desenhos.indexOf(desenho));
-					}
-				}
-			}
-		});
-		this.desenhador.desenharObjetosArmazenados(Color.DARKRED);
-		resetCanvas();
-	}
-	
-	
 	private void onCanvasMousePressedDesenho(MouseEvent event, Ponto pontoClicado){
 		if (event.getButton() == MouseButton.PRIMARY ) {			
 			//Definir qual desenho ser� feito
@@ -135,183 +104,116 @@ public class ControladorDeEventos {
 	private void desenharOpcaoGeral(Ponto pontoMedio) {
 		
 		canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-
 		int raio = 100;
-		
-		//circulo central
+
+		List<Circulo> circulosCircunferencia = new ArrayList<>();
 		Circulo circuloCentral = new Circulo(raio, pontoMedio, Color.GREEN);
-		this.desenhador.desenharPontos(CirculoCalculador.obterPontosAlgoritmoMidPoint(circuloCentral), Color.GREEN);
-		
-		//circulo leste
-		Ponto pontoLeste = new Ponto(pontoMedio.getx() + 100, pontoMedio.gety());
-		this.desenhador.desenharPonto((int) Math.floor(pontoLeste.getx()), (int) Math.floor(pontoLeste.gety()), "", Color.BLUE);
-	
-		Circulo circuloLeste = new Circulo(raio, pontoLeste, Color.GREEN);
-		this.desenhador.desenharPontos(CirculoCalculador.obterPontosAlgoritmoMidPoint(circuloLeste), Color.GREEN);
-				
-		//circulo oeste
-		Ponto pontoOeste = new Ponto(pontoMedio.getx() - 100, pontoMedio.gety());
-		this.desenhador.desenharPonto((int) Math.floor(pontoOeste.getx()), (int) Math.floor(pontoOeste.gety()), "", Color.BLUE);
-		
-		Circulo circuloOeste = new Circulo(raio, pontoOeste, Color.GREEN);
-		this.desenhador.desenharPontos(CirculoCalculador.obterPontosAlgoritmoMidPoint(circuloOeste), Color.GREEN);
-				
-		//circulo nordeste
-		Ponto pontoNordeste = new Ponto(pontoMedio.getx() + 50, pontoMedio.gety()-raio+12);
-		this.desenhador.desenharPonto((int) Math.floor(pontoNordeste.getx()), (int) Math.floor(pontoNordeste.gety()), "", Color.BLUE);
-			
-		Circulo circuloNordeste = new Circulo(raio, pontoNordeste, Color.GREEN);
-		this.desenhador.desenharPontos(CirculoCalculador.obterPontosAlgoritmoMidPoint(circuloNordeste), Color.GREEN);
-			
-		//circulo noroeste
-		Ponto pontoNoroeste = new Ponto(pontoMedio.getx() - 50, pontoMedio.gety()-raio+12);
-		this.desenhador.desenharPonto((int) Math.floor(pontoNoroeste.getx()), (int) Math.floor(pontoNoroeste.gety()), "", Color.BLUE);
-			
-		Circulo circuloNoroeste = new Circulo(raio, pontoNoroeste, Color.GREEN);
-		this.desenhador.desenharPontos(CirculoCalculador.obterPontosAlgoritmoMidPoint(circuloNoroeste), Color.GREEN);
-					
-		//circulo nordeste
-		Ponto pontoSuldeste = new Ponto(pontoMedio.getx() + 50, pontoMedio.gety()+raio-12);
-		this.desenhador.desenharPonto((int) Math.floor(pontoSuldeste.getx()), (int) Math.floor(pontoSuldeste.gety()), "", Color.BLUE);
-			
-		Circulo circuloSuldeste = new Circulo(raio, pontoSuldeste, Color.GREEN);
-		this.desenhador.desenharPontos(CirculoCalculador.obterPontosAlgoritmoMidPoint(circuloSuldeste), Color.GREEN);
-			
-		//circulo noroeste
-		Ponto pontoSuldoeste = new Ponto(pontoMedio.getx() - 50, pontoMedio.gety()+raio-12);
-		this.desenhador.desenharPonto((int) Math.floor(pontoSuldoeste.getx()), (int) Math.floor(pontoSuldoeste.gety()), "", Color.BLUE);
-			
-		Circulo circuloSuldoeste = new Circulo(raio, pontoSuldoeste, Color.GREEN);
-		this.desenhador.desenharPontos(CirculoCalculador.obterPontosAlgoritmoMidPoint(circuloSuldoeste), Color.GREEN);
-							
-										
-				
+		circulosCircunferencia.add(circuloCentral);
 
-		Reta retaCentralLeste = new Reta(pontoMedio, pontoLeste, Color.RED);
-		this.desenhador.desenharPontos(RetaCalculador.obterPontos(retaCentralLeste), Color.RED);
-		
-		Reta retaCentralOeste = new Reta(pontoMedio, pontoOeste, Color.RED);
-		this.desenhador.desenharPontos(RetaCalculador.obterPontos(retaCentralOeste), Color.RED);
-		
-		Reta retaCentralNordeste = new Reta(pontoMedio, pontoNordeste, Color.RED);
-		this.desenhador.desenharPontos(RetaCalculador.obterPontos(retaCentralNordeste), Color.RED);
-		
-		Reta retaCentralNoroeste = new Reta(pontoMedio, pontoNoroeste, Color.RED);
-		this.desenhador.desenharPontos(RetaCalculador.obterPontos(retaCentralNoroeste), Color.RED);
-		
-		Reta retaCentralSuldeste = new Reta(pontoMedio, pontoSuldeste, Color.RED);
-		this.desenhador.desenharPontos(RetaCalculador.obterPontos(retaCentralSuldeste), Color.RED);
-		
-		Reta retaCentralSuldoeste = new Reta(pontoMedio, pontoSuldoeste, Color.RED);
-		this.desenhador.desenharPontos(RetaCalculador.obterPontos(retaCentralSuldoeste), Color.RED);
-		
-		
-		Reta retaCircunferencia1 = new Reta(pontoNordeste, pontoLeste, Color.RED);
-		this.desenhador.desenharPontos(RetaCalculador.obterPontos(retaCircunferencia1), Color.RED);
-		
-		Reta retaCircunferencia2 = new Reta(pontoNoroeste, pontoNordeste, Color.RED);
-		this.desenhador.desenharPontos(RetaCalculador.obterPontos(retaCircunferencia2), Color.RED);
-		
-		Reta retaCircunferencia3 = new Reta(pontoOeste, pontoNoroeste, Color.RED);
-		this.desenhador.desenharPontos(RetaCalculador.obterPontos(retaCircunferencia3), Color.RED);
-		
-		Reta retaCircunferencia4 = new Reta(pontoSuldoeste, pontoOeste, Color.RED);
-		this.desenhador.desenharPontos(RetaCalculador.obterPontos(retaCircunferencia4), Color.RED);
-		
-		Reta retaCircunferencia5 = new Reta(pontoSuldeste, pontoSuldoeste, Color.RED);
-		this.desenhador.desenharPontos(RetaCalculador.obterPontos(retaCircunferencia5), Color.RED);
-		
-		Reta retaCircunferencia6 = new Reta(pontoLeste, pontoSuldeste, Color.RED);
-		this.desenhador.desenharPontos(RetaCalculador.obterPontos(retaCircunferencia6), Color.RED);
-		
-		
+		List<Ponto> pontos = determinarPontos(pontoMedio, raio);
+		desenharPontosDesenhoGeral(pontos);
 
-		Ponto pontoSul = new Ponto(pontoMedio.getx(), pontoMedio.gety() + 175);
-		this.desenhador.desenharPonto((int) Math.floor(pontoSul.getx()), (int) Math.floor(pontoSul.gety()), "", Color.BLUE);
-		
-		Ponto pontoNorte = new Ponto(pontoMedio.getx(), pontoMedio.gety() - 175);
-		this.desenhador.desenharPonto((int) Math.floor(pontoNorte.getx()), (int) Math.floor(pontoNorte.gety()), "", Color.BLUE);
-		
-		Reta retaExternoSul = new Reta(pontoMedio, pontoSul, Color.RED);
-		this.desenhador.desenharPontos(RetaCalculador.obterPontos(retaExternoSul), Color.RED);
-		
-		Reta retaExternoNorte = new Reta(pontoMedio, pontoNorte, Color.RED);
-		this.desenhador.desenharPontos(RetaCalculador.obterPontos(retaExternoNorte), Color.RED);
-		
-		
-		
-		
-		Ponto pontoNordesteExterno = new Ponto(pontoMedio.getx() + 150, pontoMedio.gety()-raio+12);
-		this.desenhador.desenharPonto((int) Math.floor(pontoNordesteExterno.getx()), (int) Math.floor(pontoNordesteExterno.gety()), "", Color.BLUE);
-		
-		Ponto pontoSuldesteExterno = new Ponto(pontoMedio.getx() + 150, pontoMedio.gety()+raio-12);
-		this.desenhador.desenharPonto((int) Math.floor(pontoSuldesteExterno.getx()), (int) Math.floor(pontoSuldesteExterno.gety()), "", Color.BLUE);
-		
-		Ponto pontoNoroesteExterno = new Ponto(pontoMedio.getx() - 150, pontoMedio.gety()-raio+12);
-		this.desenhador.desenharPonto((int) Math.floor(pontoNoroesteExterno.getx()), (int) Math.floor(pontoNoroesteExterno.gety()), "", Color.BLUE);
-		
-		Ponto pontoSuldoesteExterno = new Ponto(pontoMedio.getx() - 150, pontoMedio.gety()+raio-12);
-		this.desenhador.desenharPonto((int) Math.floor(pontoSuldoesteExterno.getx()), (int) Math.floor(pontoSuldoesteExterno.gety()), "", Color.BLUE);
+		circulosCircunferencia.addAll(determinarCirculos(pontos, raio));
+		desenharCirculosDesenhoGeral(circulosCircunferencia);
 
+		List<Reta> retas = determinarRetasCirculoCentral(pontoMedio, pontos);
+		desenharRetasDesenhoGeral(retas);
 
-		Reta retaExterno1 = new Reta(pontoMedio, pontoNordesteExterno, Color.RED);
-		this.desenhador.desenharPontos(RetaCalculador.obterPontos(retaExterno1), Color.RED);
-		
-		Reta retaExterno2 = new Reta(pontoMedio, pontoSuldesteExterno, Color.RED);
-		this.desenhador.desenharPontos(RetaCalculador.obterPontos(retaExterno2), Color.RED);
+		List<Ponto> pontosExtremos = determinarPontosExtremos(pontoMedio, raio);
+		desenharPontosDesenhoGeral(pontosExtremos);
 
-		Reta retaExterno3 = new Reta(pontoMedio, pontoNoroesteExterno, Color.RED);
-		this.desenhador.desenharPontos(RetaCalculador.obterPontos(retaExterno3), Color.RED);
-		
-		Reta retaExterno4 = new Reta(pontoMedio, pontoSuldoesteExterno, Color.RED);
-		this.desenhador.desenharPontos(RetaCalculador.obterPontos(retaExterno4), Color.RED);
-		
-		
+		List<Reta> retasExtremas = determinarRetasExtremas(pontoMedio, pontosExtremos);
+		desenharRetasDesenhoGeral(retasExtremas);
 
-
-		Reta retaCircExterno1 = new Reta(pontoNorte, pontoNordesteExterno, Color.RED);
-		this.desenhador.desenharPontos(RetaCalculador.obterPontos(retaCircExterno1), Color.RED);
-		
-		Reta retaCircExterno2 = new Reta(pontoNoroesteExterno, pontoNorte, Color.RED);
-		this.desenhador.desenharPontos(RetaCalculador.obterPontos(retaCircExterno2), Color.RED);
-
-		Reta retaCircExterno3 = new Reta(pontoSuldoesteExterno, pontoNoroesteExterno, Color.RED);
-		this.desenhador.desenharPontos(RetaCalculador.obterPontos(retaCircExterno3), Color.RED);
-		
-		Reta retaCircExterno4 = new Reta(pontoSul, pontoSuldoesteExterno, Color.RED);
-		this.desenhador.desenharPontos(RetaCalculador.obterPontos(retaCircExterno4), Color.RED);
-
-		Reta retaCircExterno5 = new Reta(pontoSuldesteExterno, pontoSul, Color.RED);
-		this.desenhador.desenharPontos(RetaCalculador.obterPontos(retaCircExterno5), Color.RED);
-		
-		Reta retaCircExterno6 = new Reta(pontoNordesteExterno, pontoSuldesteExterno, Color.RED);
-		this.desenhador.desenharPontos(RetaCalculador.obterPontos(retaCircExterno6), Color.RED);
-
-		
-		Reta retaTriangulo11 = new Reta(pontoNorte, pontoSuldesteExterno, Color.RED);
-		this.desenhador.desenharPontos(RetaCalculador.obterPontos(retaTriangulo11), Color.RED);
-
-		Reta retaTriangulo12 = new Reta(pontoSuldesteExterno, pontoSuldoesteExterno, Color.RED);
-		this.desenhador.desenharPontos(RetaCalculador.obterPontos(retaTriangulo12), Color.RED);
-		
-		Reta retaTriangulo13 = new Reta(pontoSuldoesteExterno, pontoNorte, Color.RED);
-		this.desenhador.desenharPontos(RetaCalculador.obterPontos(retaTriangulo13), Color.RED);
-		
-		
-		
-		Reta retaTriangulo21 = new Reta(pontoSul, pontoNordesteExterno, Color.RED);
-		this.desenhador.desenharPontos(RetaCalculador.obterPontos(retaTriangulo21), Color.RED);
-
-		Reta retaTriangulo22 = new Reta(pontoNordesteExterno, pontoNoroesteExterno, Color.RED);
-		this.desenhador.desenharPontos(RetaCalculador.obterPontos(retaTriangulo22), Color.RED);
-		
-		Reta retaTriangulo23 = new Reta(pontoNoroesteExterno, pontoSul, Color.RED);
-		this.desenhador.desenharPontos(RetaCalculador.obterPontos(retaTriangulo23), Color.RED);
-		
-		
-		
+		List<Reta> retasExtremas2 = determinarRetasExtremas2(pontosExtremos);
+		desenharRetasDesenhoGeral(retasExtremas2);
 	}
-	
+
+	private List<Ponto> determinarPontos(Ponto pontoMedio, int raio){
+		List<Ponto> pontos = new ArrayList<>();
+		pontos.add(new Ponto(pontoMedio.getx() + 100, pontoMedio.gety())); //leste
+		pontos.add(new Ponto(pontoMedio.getx() + 50, pontoMedio.gety()-raio+12)); //nordeste
+		pontos.add(new Ponto(pontoMedio.getx() - 50, pontoMedio.gety()-raio+12)); //noroeste
+		pontos.add(new Ponto(pontoMedio.getx() - 100, pontoMedio.gety())); //oeste
+		pontos.add(new Ponto(pontoMedio.getx() - 50, pontoMedio.gety()+raio-12)); //sudoeste
+		pontos.add(new Ponto(pontoMedio.getx() + 50, pontoMedio.gety()+raio-12)); //sudeste
+		return pontos;
+	}
+
+	private void desenharPontosDesenhoGeral(List<Ponto> pontos){
+		for(Ponto ponto : pontos){
+			this.desenhador.desenharPonto((int) Math.floor(ponto.getx()), (int) Math.floor(ponto.gety()), "", Color.BLUE);
+		}
+	}
+
+	private List<Circulo> determinarCirculos(List<Ponto> pontos, int raio){
+		List<Circulo> circulos = new ArrayList<>();
+		for(Ponto ponto : pontos){
+			circulos.add(new Circulo(raio, ponto, Color.GREEN));
+		}
+		return circulos;
+	}
+
+	private void desenharCirculosDesenhoGeral(List<Circulo> circulos){
+		for(Circulo circulo : circulos){
+			this.desenhador.desenharPontos(CirculoCalculador.obterPontosAlgoritmoMidPoint(circulo), Color.GREEN);
+		}
+	}
+
+	private List<Reta> determinarRetasCirculoCentral(Ponto pontoMedio, List<Ponto> pontos){
+		List<Reta> retas = new ArrayList<>();
+		for(Ponto ponto : pontos){
+			retas.add(new Reta(pontoMedio, ponto, Color.RED));
+		}
+		return retas;
+	}
+
+	private void desenharRetasDesenhoGeral(List<Reta> retas){
+		for(Reta reta : retas){
+			this.desenhador.desenharPontos(RetaCalculador.obterPontos(reta), Color.RED);
+		}
+	}
+
+	private List<Ponto> determinarPontosExtremos(Ponto pontoMedio, int raio){
+		List<Ponto> pontos = new ArrayList<>();
+		pontos.add(new Ponto(pontoMedio.getx(), pontoMedio.gety() - 175)); //norte
+		pontos.add(new Ponto(pontoMedio.getx() - 150, pontoMedio.gety()-raio+12)); //noroeste
+		pontos.add(new Ponto(pontoMedio.getx() - 150, pontoMedio.gety()+raio-12)); //suldoeste
+		pontos.add(new Ponto(pontoMedio.getx(), pontoMedio.gety() + 175)); //sul
+		pontos.add(new Ponto(pontoMedio.getx() + 150, pontoMedio.gety()+raio-12)); //suldeste
+		pontos.add(new Ponto(pontoMedio.getx() + 150, pontoMedio.gety()-raio+12)); //nordeste
+		return pontos;
+	}
+
+	private List<Reta> determinarRetasExtremas(Ponto pontoMedio, List<Ponto> pontos){
+		List<Reta> retas = new ArrayList<>();
+		for(Ponto ponto : pontos){
+			retas.add(new Reta(pontoMedio, ponto, Color.RED));
+		}
+		return retas;
+	}
+
+	private List<Reta> determinarRetasExtremas2(List<Ponto> pontos){
+		List<Reta> retas = new ArrayList<>();
+
+		retas.add(new Reta(pontos.get(0), pontos.get(5), Color.RED));
+		retas.add(new Reta(pontos.get(1), pontos.get(0), Color.RED));
+		retas.add(new Reta(pontos.get(2), pontos.get(1), Color.RED));
+		retas.add(new Reta(pontos.get(3), pontos.get(2), Color.RED));
+		retas.add(new Reta(pontos.get(4), pontos.get(3), Color.RED));
+		retas.add(new Reta(pontos.get(5), pontos.get(4), Color.RED));
+
+		retas.add(new Reta(pontos.get(0), pontos.get(4), Color.RED));
+		retas.add(new Reta(pontos.get(4), pontos.get(2), Color.RED));
+		retas.add(new Reta(pontos.get(2), pontos.get(0), Color.RED));
+
+		retas.add(new Reta(pontos.get(3), pontos.get(5), Color.RED));
+		retas.add(new Reta(pontos.get(5), pontos.get(1), Color.RED));
+		retas.add(new Reta(pontos.get(1), pontos.get(3), Color.RED));
+
+		return retas;
+	}
+
 	private void desenharCurvaDoDragao() {
 		if (iteracoesCurvaDragao <= 17) {
 			preencherCanvasCurvaDoDragao();
@@ -342,14 +244,7 @@ public class ControladorDeEventos {
 	
 	public void limparCanvas() {
 		canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
-		this.desenhador.inicilizarEstruturasManipulacaoDeDesenhos();
 		resetCanvas();
-	}
-
-	private void salvarCanvas(){
-		// Capturando estado do canvas para desenhar sobre ele
-		SnapshotParameters params = new SnapshotParameters();
-		params.setFill(Color.WHITE);
 	}
 	
 	public void resetCanvas(){

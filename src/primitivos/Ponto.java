@@ -36,27 +36,5 @@ public class Ponto {
 	public double gety() {
 		return this.ponto.getY();
 	}
-	
-	@XmlElement(name = "x")
-	public double getXNormalizada(){
-		return getx()/TelaPrincipal.LARGURA_CANVAS;
-	}
-	public void setXNormalizada(double xPorc){
-		this.xp = xPorc*TelaPrincipal.LARGURA_CANVAS;
-		if (this.yp != null){
-			this.ponto = new Point2D(this.xp, this.yp);
-		}
-	}
-	
-	@XmlElement(name = "y")
-	public double getYNormalizada(){
-		return gety()/TelaPrincipal.ALTURA_CANVAS;
-	}
-	
-	public void setYNormalizada(double yPorc){
-		this.yp = yPorc*TelaPrincipal.ALTURA_CANVAS;
-		if (this.xp != null){
-			this.ponto = new Point2D(this.xp, this.yp);
-		}	
-	}
+
 }
