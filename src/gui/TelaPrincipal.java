@@ -21,6 +21,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import primitivos.Ponto;
+import utils.AlertaCallback;
+import utils.AlertaPersonalizado;
 
 @SuppressWarnings("restriction")
 public class TelaPrincipal {
@@ -33,6 +35,13 @@ public class TelaPrincipal {
 	private MenuItem menuPontos;
 	private MenuItem menuRetas;
 	private MenuItem menuCirculos;
+	private MenuItem menuCurvaDragao;
+	private MenuItem opcaoGeral;
+	
+
+	private Menu opcoes;
+	private MenuItem menuLimpar;
+	
 	
 	private Canvas canvas;
 	private ControladorDeEventos controladorDeEventos;
@@ -65,10 +74,16 @@ public class TelaPrincipal {
         menuPontos 						        = new MenuItem("Pontos");
         menuRetas 						        = new MenuItem("Retas");
         menuCirculos 					        = new MenuItem("Circulos");
+        menuCurvaDragao 					    = new MenuItem("Curva do Dragão");
+        opcaoGeral		 					    = new MenuItem("Opção Geral");
+
+        opcoes			 				        = new Menu("Opções");
+        menuLimpar 						        = new MenuItem("Limpar");
+
+    	desenhoPontoPonto.getItems().addAll(menuPontos,menuRetas,menuCirculos,menuCurvaDragao,opcaoGeral);
+    	opcoes.getItems().addAll(menuLimpar);
     	
-    	desenhoPontoPonto.getItems().addAll(menuPontos,menuRetas,menuCirculos);
-    	
-    	menu.getMenus().addAll(desenhoPontoPonto);
+    	menu.getMenus().addAll(desenhoPontoPonto, opcoes);
     	
     	//Criando footer
     	GridPane grid = montarMenuOpcoesGraficas();
@@ -102,8 +117,24 @@ public class TelaPrincipal {
 		this.menuCirculos.setOnAction(e -> {
 			controladorDeEventos.getEventoBasicoMenuDesenho(TipoDesenho.CIRCULO);
 		});
-
+		this.menuCurvaDragao.setOnAction(e -> {
+			controladorDeEventos.setTipoDesenho(TipoDesenho.CURVA_DO_DRAGAO);
+		});
+		this.opcaoGeral.setOnAction(e -> {
+			controladorDeEventos.setTipoDesenho(TipoDesenho.OPCAO_GERAL);
+		});
 		
+		
+		
+		this.menuLimpar.setOnAction(e -> {
+			AlertaPersonalizado.criarAlertaComCallback("A execucao dessa operacao resulta na perda de todos os dados desenhados.\n "
+					+ "Deseja continuar?", new AlertaCallback() {				
+						@Override
+						public void alertaCallbak() {
+							controladorDeEventos.limparCanvas();
+						}
+					});
+		});
 		
 		// canvas
 		canvas.setOnMouseMoved(event -> {
@@ -140,7 +171,7 @@ public class TelaPrincipal {
 		
 		grid.add(new Label("Cor: "), 0, 0);
 		grid.add(colorPicker, 1, 0);
-		grid.add(new Label("Diametro: "), 2, 0);
+		grid.add(new Label("Espessura: "), 2, 0);
 		grid.add(diametroLinhas, 3, 0);
 
 		return grid;

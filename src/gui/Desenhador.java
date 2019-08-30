@@ -92,22 +92,6 @@ public class Desenhador {
 		}
 	}
 	
-	public void desenharPrimitivoElastico(Ponto pontoInicial, Ponto pontoFinal, TipoDesenho tipoDesenho, boolean salvar) {
-		switch(tipoDesenho) {
-			case RETA_ELASTICA:
-				desenharReta(pontoInicial,pontoFinal, salvar);
-				break;
-			case CIRCULO_ELASTICO:
-				desenharCirculo(pontoInicial,pontoFinal, salvar);
-				break;
-			case RETANGULO_ELASTICO:
-				//desenharRetangulo(pontoInicial,pontoFinal, salvar);
-				break;
-			case SELECIONAR_AREA_CLIPPING:
-				//desenharAreaSelecao(pontoInicial, pontoFinal, salvar);
-		}
-	}
-	
 	public void desenharReta(Ponto pontoInicial, Ponto pontoFinal, boolean salvar) {
 		Reta reta = new Reta(pontoInicial, pontoFinal, cor);
 		desenharPontos(RetaCalculador.obterPontosAlgoritmoMidPoint(reta), cor);
