@@ -2,16 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cb62e9fb-14b3-4b20-bf04-fa440dd605ee" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/controladores/ObjetoDesenhado.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/calculadores/CalculadorGenerico.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/calculadores/CalculadorGenerico.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/calculadores/CirculoCalculador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/calculadores/CirculoCalculador.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/calculadores/RetaCalculador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/calculadores/RetaCalculador.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/cgpi/gui/TelaPrincipal$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/cgpi/gui/TelaPrincipal$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controladores/ControladorDeEventos.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controladores/ControladorDeEventos.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controladores/TipoPrimitivo.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controladores/TipoDesenho.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controladores/TipoDesenho.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/Desenhador.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/Desenhador.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/gui/TelaPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/gui/TelaPrincipal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/primitivos/Circulo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitivos/Circulo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/primitivos/Ponto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitivos/Ponto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/primitivos/PontoGr.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/primitivos/PontoGr.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,48 +20,55 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="TipoDesenho.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/controladores/TipoDesenho.java">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="Desenhador.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/gui/Desenhador.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+            <state relative-caret-position="244">
+              <caret line="94" column="136" selection-start-line="94" selection-start-column="136" selection-end-line="94" selection-end-column="136" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#583#600#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PontoComMouseGuiExemploProfessor.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/gui/PontoComMouseGuiExemploProfessor.java">
+      <file leaf-file-name="TelaPrincipal.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/gui/TelaPrincipal.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="420">
+              <caret line="110" column="56" selection-start-line="110" selection-start-column="56" selection-end-line="110" selection-end-column="56" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#3241#3242#0" expanded="true" />
+                <element signature="e#3293#3294#0" expanded="true" />
+                <element signature="e#5655#5687#0" expanded="true" />
+                <element signature="e#5996#6028#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Aplicacao.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/app/Aplicacao.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="90">
-              <caret line="19" column="24" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
+              <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Circulo.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/primitivos/Circulo.java">
+      <file leaf-file-name="ControladorDeEventos.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/controladores/ControladorDeEventos.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="50" selection-start-line="50" selection-end-line="50" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Cor.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/primitivos/Cor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Ponto.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/primitivos/Ponto.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="38" selection-start-line="38" selection-end-line="38" />
+            <state relative-caret-position="314">
+              <caret line="256" column="39" selection-start-line="256" selection-start-column="39" selection-end-line="256" selection-end-column="39" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#8231#8232#0" expanded="true" />
+                <element signature="e#8238#8239#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -71,35 +76,8 @@
       <file leaf-file-name="PontoGr.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/primitivos/PontoGr.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="15" column="9" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Reta.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/primitivos/Reta.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="29">
-              <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AlertaPersonalizado.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/utils/AlertaPersonalizado.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ControladorDeEventos.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/controladores/ControladorDeEventos.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-912">
-              <caret line="107" lean-forward="true" selection-start-line="107" selection-end-line="108" selection-end-column="65" />
+            <state relative-caret-position="102">
+              <caret line="137" lean-forward="true" selection-start-line="137" selection-end-line="137" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -107,16 +85,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CurvaDoDragaoCalculador.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/calculadores/CurvaDoDragaoCalculador.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="31" column="72" lean-forward="true" selection-start-line="31" selection-start-column="72" selection-end-line="31" selection-end-column="72" />
-            </state>
-          </provider>
-        </entry>
-      </file>
     </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -126,13 +102,16 @@
       <list>
         <option value="$PROJECT_DIR$/src/controladores/TipoPrimitivo.java" />
         <option value="$PROJECT_DIR$/src/calculadores/RetaCalculador.java" />
-        <option value="$PROJECT_DIR$/src/gui/Desenhador.java" />
         <option value="$PROJECT_DIR$/src/calculadores/CalculadorGenerico.java" />
-        <option value="$PROJECT_DIR$/src/gui/TelaPrincipal.java" />
-        <option value="$PROJECT_DIR$/src/controladores/ControladorDeEventos.java" />
         <option value="$PROJECT_DIR$/src/calculadores/CirculoCalculador.java" />
         <option value="$PROJECT_DIR$/src/primitivos/Circulo.java" />
         <option value="$PROJECT_DIR$/src/primitivos/Ponto.java" />
+        <option value="$PROJECT_DIR$/src/controladores/TipoDesenho.java" />
+        <option value="$PROJECT_DIR$/src/controladores/ObjetoDesenhado.java" />
+        <option value="$PROJECT_DIR$/src/gui/TelaPrincipal.java" />
+        <option value="$PROJECT_DIR$/src/controladores/ControladorDeEventos.java" />
+        <option value="$PROJECT_DIR$/src/primitivos/PontoGr.java" />
+        <option value="$PROJECT_DIR$/src/gui/Desenhador.java" />
       </list>
     </option>
   </component>
@@ -145,7 +124,7 @@
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths />
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" fullScreen="true">
     <option name="y" value="23" />
     <option name="width" value="1440" />
     <option name="height" value="824" />
@@ -299,31 +278,32 @@
       <option name="presentableId" value="Default" />
       <updated>1567115410112</updated>
       <workItem from="1567115411711" duration="20000" />
-      <workItem from="1567196004479" duration="5982000" />
+      <workItem from="1567196004479" duration="6261000" />
+      <workItem from="1569277603250" duration="11122000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6002000" />
+    <option name="totallyTimeSpent" value="17403000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1440" height="824" extended-state="0" />
+    <frame x="0" y="0" width="1440" height="900" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Messages" weight="0.32933334" />
+      <window_info anchor="bottom" id="Messages" order="7" weight="0.32933334" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
       <window_info id="Image Layers" order="2" />
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32933334" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.2912736" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
@@ -345,52 +325,82 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/controladores/TipoPrimitivo.java">
+    <entry file="file://$PROJECT_DIR$/src/controladores/TipoDesenho.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="4" selection-end-column="1" />
+        <state relative-caret-position="105">
+          <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/app/Aplicacao.java">
+    <entry file="file://$PROJECT_DIR$/src/gui/PontoComMouseGuiExemploProfessor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
+        <state relative-caret-position="90">
+          <caret line="19" column="24" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/TelaPrincipal.java">
+    <entry file="file://$PROJECT_DIR$/src/primitivos/Circulo.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="140" column="46" selection-start-line="140" selection-start-column="46" selection-end-line="140" selection-end-column="46" />
+        <state relative-caret-position="465">
+          <caret line="50" selection-start-line="50" selection-end-line="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/primitivos/Cor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="6" column="13" selection-start-line="6" selection-start-column="13" selection-end-line="6" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/primitivos/Ponto.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="390">
+          <caret line="38" selection-start-line="38" selection-end-line="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/primitivos/PontoGr.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="15" column="9" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/primitivos/Reta.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/AlertaPersonalizado.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/calculadores/CurvaDoDragaoCalculador.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="405">
+          <caret line="31" column="72" lean-forward="true" selection-start-line="31" selection-start-column="72" selection-end-line="31" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controladores/ControladorDeEventos.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1305">
+          <caret line="107" lean-forward="true" selection-start-line="107" selection-end-line="108" selection-end-column="65" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#8231#8232#0" expanded="true" />
+            <element signature="e#8238#8239#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/gui/Desenhador.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="216">
-          <caret line="66" column="16" selection-start-line="66" selection-start-column="16" selection-end-line="66" selection-end-column="16" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3089#3090#0" expanded="true" />
-            <element signature="e#3129#3130#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/calculadores/CirculoCalculador.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-414">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controladores/TipoPrimitivo.java" />
     <entry file="file://$PROJECT_DIR$/src/calculadores/OpcaoGeralCalculator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -415,24 +425,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controladores/TipoDesenho.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/gui/PontoComMouseGuiExemploProfessor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
-          <caret line="19" column="24" lean-forward="true" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/primitivos/Circulo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="50" selection-start-line="50" selection-end-line="50" />
+          <caret line="19" column="24" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
         </state>
       </provider>
     </entry>
@@ -443,23 +439,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/primitivos/Ponto.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="38" selection-start-line="38" selection-end-line="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/primitivos/PontoGr.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="15" column="9" selection-start-line="15" selection-start-column="9" selection-end-line="15" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/primitivos/Reta.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="29">
+        <state relative-caret-position="165">
           <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
         </state>
       </provider>
@@ -473,17 +455,121 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/calculadores/CurvaDoDragaoCalculador.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="31" column="72" lean-forward="true" selection-start-line="31" selection-start-column="72" selection-end-line="31" selection-end-column="72" />
+        <state relative-caret-position="405">
+          <caret line="31" column="72" selection-start-line="31" selection-start-column="72" selection-end-line="31" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/app/Aplicacao.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="90">
+          <caret line="8" lean-forward="true" selection-start-line="8" selection-end-line="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_172.jdk/Contents/Home/javafx-src.zip!/javafx/scene/canvas/GraphicsContext.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="159">
+          <caret line="2336" column="16" selection-start-line="2336" selection-start-column="16" selection-end-line="2336" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/primitivos/Circulo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="50" selection-start-line="50" selection-end-line="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controladores/TipoDesenho.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/primitivos/Ponto.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="21" column="11" selection-start-line="21" selection-start-column="11" selection-end-line="21" selection-end-column="11" />
+          <folding>
+            <element signature="e#405#406#0" expanded="true" />
+            <element signature="e#441#442#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/calculadores/CirculoCalculador.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="43" column="24" selection-start-line="43" selection-start-column="24" selection-end-line="43" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controladores/ObjetoDesenhado.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="2" selection-start-column="2" selection-end-column="2" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#210#211#0" expanded="true" />
+            <element signature="e#237#238#0" expanded="true" />
+            <element signature="e#282#283#0" expanded="true" />
+            <element signature="e#314#315#0" expanded="true" />
+            <element signature="e#354#355#0" expanded="true" />
+            <element signature="e#383#384#0" expanded="true" />
+            <element signature="e#434#435#0" expanded="true" />
+            <element signature="e#470#471#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/TelaPrincipal.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="110" column="56" selection-start-line="110" selection-start-column="56" selection-end-line="110" selection-end-column="56" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3241#3242#0" expanded="true" />
+            <element signature="e#3293#3294#0" expanded="true" />
+            <element signature="e#5655#5687#0" expanded="true" />
+            <element signature="e#5996#6028#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/controladores/ControladorDeEventos.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-912">
-          <caret line="107" lean-forward="true" selection-start-line="107" selection-end-line="108" selection-end-column="65" />
+        <state relative-caret-position="314">
+          <caret line="256" column="39" selection-start-line="256" selection-start-column="39" selection-end-line="256" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#8231#8232#0" expanded="true" />
+            <element signature="e#8238#8239#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/primitivos/PontoGr.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="137" lean-forward="true" selection-start-line="137" selection-end-line="137" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/gui/Desenhador.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="244">
+          <caret line="94" column="136" selection-start-line="94" selection-start-column="136" selection-end-line="94" selection-end-column="136" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#583#600#0" expanded="true" />
           </folding>
         </state>
       </provider>

@@ -22,17 +22,19 @@ public class ControladorDeEventos {
 
 	private int iteracoesCurvaDragao;
 	private Canvas canvas;
+	private Canvas canvasLittle;
 	private TipoDesenho tipoDesenho;
 	private Ponto pontoAtual;
 	private boolean fimDesenho;
 	private Desenhador desenhador;
 	
-	public ControladorDeEventos(Canvas canvas) {
+	public ControladorDeEventos(Canvas canvas, Canvas canvasLittle) {
 		super();
 		this.canvas = canvas;
+		this.canvasLittle = canvasLittle;
 		this.iteracoesCurvaDragao = 0;
 		fimDesenho = true;
-		this.desenhador = new Desenhador(this.canvas);
+		this.desenhador = new Desenhador(this.canvas, this.canvasLittle);
 	}
 	
 	public Desenhador getDesenhador() {
@@ -62,10 +64,10 @@ public class ControladorDeEventos {
 		} else {
 			switch (tipoDesenho) {
 			case RETA:
-				this.desenhador.desenharReta(pontoAtual,pt,fimDesenho);
+				this.desenhador.desenharReta(pontoAtual,pt);
 				break;
 			case CIRCULO:
-				this.desenhador.desenharCirculo(pontoAtual,pt,fimDesenho);
+				this.desenhador.desenharCirculo(pontoAtual,pt);
 				break;
 			default:
 				throw new RuntimeException("Erro interno");
@@ -142,7 +144,8 @@ public class ControladorDeEventos {
 
 	private void desenharPontosDesenhoGeral(List<Ponto> pontos){
 		for(Ponto ponto : pontos){
-			this.desenhador.desenharPonto((int) Math.floor(ponto.getx()), (int) Math.floor(ponto.gety()), "", Color.BLUE);
+			this.desenhador.setCor(Color.BLUE);
+			this.desenhador.desenharPonto((int) Math.floor(ponto.getx()), (int) Math.floor(ponto.gety()), "", desenhador.getCor());
 		}
 	}
 
@@ -156,7 +159,8 @@ public class ControladorDeEventos {
 
 	private void desenharCirculosDesenhoGeral(List<Circulo> circulos){
 		for(Circulo circulo : circulos){
-			this.desenhador.desenharPontos(CirculoCalculador.obterPontosAlgoritmoMidPoint(circulo), Color.GREEN);
+			this.desenhador.setCor(Color.GREEN);
+			this.desenhador.desenharPontos(CirculoCalculador.obterPontosAlgoritmoMidPoint(circulo), desenhador.getCor(), TipoDesenho.OPCAO_GERAL);
 		}
 	}
 
@@ -170,7 +174,8 @@ public class ControladorDeEventos {
 
 	private void desenharRetasDesenhoGeral(List<Reta> retas){
 		for(Reta reta : retas){
-			this.desenhador.desenharPontos(RetaCalculador.obterPontos(reta), Color.RED);
+			this.desenhador.setCor(Color.RED);
+			this.desenhador.desenharPontos(RetaCalculador.obterPontos(reta), desenhador.getCor(), TipoDesenho.OPCAO_GERAL);
 		}
 	}
 
@@ -235,7 +240,7 @@ public class ControladorDeEventos {
 		try {
 			retasCurvaDragao = calc.getRetasCurva();
 			for (Reta retaCalc : retasCurvaDragao) {
-				this.desenhador.desenharPontos(RetaCalculador.obterPontos(retaCalc), this.desenhador.getCor());
+				this.desenhador.desenharPontos(RetaCalculador.obterPontos(retaCalc), this.desenhador.getCor(), TipoDesenho.CURVA_DO_DRAGAO);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -244,9 +249,14 @@ public class ControladorDeEventos {
 	
 	public void limparCanvas() {
 		canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+		canvasLittle.getGraphicsContext2D().clearRect(0, 0, canvasLittle.getWidth(), canvasLittle.getHeight());
 		resetCanvas();
 	}
-	
+
+	public void redesenharCanvas() {
+		this.desenhador.desenharObjetosArmaznados();
+	}
+
 	public void resetCanvas(){
 		fimDesenho = true;
 		pontoAtual = null;

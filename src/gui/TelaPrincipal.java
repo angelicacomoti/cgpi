@@ -5,20 +5,10 @@ import controladores.TipoDesenho;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import utils.AlertaCallback;
 import utils.AlertaPersonalizado;
@@ -27,24 +17,31 @@ import utils.AlertaPersonalizado;
 public class TelaPrincipal {
 
 	private Stage palco;
-	private MenuBar menu;
-	private Menu desenhoPontoPonto;
-	private MenuItem menuPontos;
-	private MenuItem menuRetas;
-	private MenuItem menuCirculos;
-	private MenuItem menuCurvaDragao;
-	private MenuItem opcaoGeral;
-	
+	private VBox menu;
 
-	private Menu opcoes;
-	private MenuItem menuLimpar;
-	
+	private HBox desenhoPontoPonto;
+	private Button pontos;
+	private Button retas;
+	private Button circulos;
+
+	private HBox desenhoFigura;
+	private Button curvaDragao;
+	private Button opcaoGeral;
+
+	private HBox opcoes;
+	private Button limpar;
+	private Button redesenhar;
+	private HBox opcoes2;
+	private Button undo;
+	private Button redo;
+
 	
 	private Canvas canvas;
+	private Canvas canvasLittle;
 	private ControladorDeEventos controladorDeEventos;
 	
-	public static int LARGURA_CANVAS = 1000;
-	public static int ALTURA_CANVAS = 700;
+	public static int LARGURA_CANVAS = 1200;
+	public static int ALTURA_CANVAS = 800;
 					
 
 	public TelaPrincipal(Stage palco) {
@@ -59,40 +56,27 @@ public class TelaPrincipal {
 		palco.setResizable(false);
 
 		//criando Canvas
-        canvas = new Canvas(palco.getWidth(), palco.getHeight());
-		controladorDeEventos = new ControladorDeEventos(canvas);  
-		
+		canvas = new Canvas(palco.getWidth(), palco.getHeight());
+
+		//criando canvas pequeno
+		BorderPane paneLittle = new BorderPane();
+		paneLittle.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+		canvasLittle = new Canvas(250, 166); // proporçao: divide o maior por 4,8
+		paneLittle.setCenter(canvasLittle);
+
+		controladorDeEventos = new ControladorDeEventos(canvas, canvasLittle);
+
 		// Painel para os componentes
         BorderPane pane = new BorderPane();
         
         //Criando Menu
-        menu 							        = new MenuBar();
-        desenhoPontoPonto 				        = new Menu("Desenho Ponto a Ponto");
-        menuPontos 						        = new MenuItem("Pontos");
-        menuRetas 						        = new MenuItem("Retas");
-        menuCirculos 					        = new MenuItem("Circulos");
-        menuCurvaDragao 					    = new MenuItem("Curva do Dragão");
-        opcaoGeral		 					    = new MenuItem("Opção Geral");
-
-        opcoes			 				        = new Menu("Opções");
-        menuLimpar 						        = new MenuItem("Limpar");
-
-    	desenhoPontoPonto.getItems().addAll(menuPontos,menuRetas,menuCirculos,menuCurvaDragao,opcaoGeral);
-    	opcoes.getItems().addAll(menuLimpar);
-    	
-    	menu.getMenus().addAll(desenhoPontoPonto, opcoes);
-    	
-    	//Criando footer
-    	GridPane grid = montarMenuOpcoesGraficas();
-    	VBox menus = new VBox();
-    	menus.getChildren().addAll(menu,grid);
-    	menus.setMinHeight(60);
-    	menus.setMaxHeight(60);
+        menu = montarMenuOpcoesButton();
+        menu.getChildren().addAll(paneLittle);
     	        
     	// atributos do painel
         pane.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
         pane.setCenter(canvas); // posiciona o componente de desenho
-        pane.setTop(menus);
+        pane.setLeft(menu);
     	atribuirEventosAosComponentesGraficos();
         // cria e insere cena
         Scene scene = new Scene(pane);
@@ -104,26 +88,22 @@ public class TelaPrincipal {
 	// Vincula??o dos componentes do MENU aos eventos declarados no ControladorDeEventos de componentes grasficos.
 	private void atribuirEventosAosComponentesGraficos() {
 		// menu
-		this.menuRetas.setOnAction(e -> {
+		this.retas.setOnAction(e -> {
 			controladorDeEventos.getEventoBasicoMenuDesenho(TipoDesenho.RETA);
 		});
-
-		this.menuPontos.setOnAction(e -> {
+		this.pontos.setOnAction(e -> {
 			controladorDeEventos.getEventoBasicoMenuDesenho(TipoDesenho.PONTO);
 		});
-		this.menuCirculos.setOnAction(e -> {
+		this.circulos.setOnAction(e -> {
 			controladorDeEventos.getEventoBasicoMenuDesenho(TipoDesenho.CIRCULO);
 		});
-		this.menuCurvaDragao.setOnAction(e -> {
+		this.curvaDragao.setOnAction(e -> {
 			controladorDeEventos.setTipoDesenho(TipoDesenho.CURVA_DO_DRAGAO);
 		});
 		this.opcaoGeral.setOnAction(e -> {
 			controladorDeEventos.setTipoDesenho(TipoDesenho.OPCAO_GERAL);
 		});
-		
-		
-		
-		this.menuLimpar.setOnAction(e -> {
+		this.limpar.setOnAction(e -> {
 			AlertaPersonalizado.criarAlertaComCallback("A execucao dessa operacao resulta na perda de todos os dados desenhados.\n "
 					+ "Deseja continuar?", new AlertaCallback() {				
 						@Override
@@ -131,6 +111,16 @@ public class TelaPrincipal {
 							controladorDeEventos.limparCanvas();
 						}
 					});
+		});
+
+		this.redesenhar.setOnAction(e -> {
+			controladorDeEventos.redesenharCanvas();
+		});
+		this.undo.setOnAction(e -> {
+			controladorDeEventos.redesenharCanvas();
+		});
+		this.redo.setOnAction(e -> {
+			controladorDeEventos.redesenharCanvas();
 		});
 		
 		// canvas
@@ -142,21 +132,79 @@ public class TelaPrincipal {
 		});
 
 	}
-	
-	// Menu de cores e diametro das linhas
+
+	private VBox montarMenuOpcoesButton(){
+		VBox menu = new VBox();
+		menu.getChildren().addAll(new Label("Desenho Ponto a Ponto "), criarPrimeiraLinha());
+		menu.getChildren().addAll(new Label("Desenho Figuras"), criarSegundaLinha());
+		menu.getChildren().addAll(new Label("Opções "), criarTerceiraLinha(), criarQuartaLinha());
+		menu.getChildren().addAll(new Label(""), criarOpcaoCor(), new Label(""), criarOpcaoEspessura());
+		menu.setSpacing(10);
+
+		menu.setBackground(new Background(new BackgroundFill(Color.LIGHTGREY, CornerRadii.EMPTY, Insets.EMPTY)));
+		menu.setPadding(new Insets(10, 10, 15, 10));
+		return menu;
+	}
+
+	private HBox criarPrimeiraLinha(){
+		desenhoPontoPonto = new HBox();
+		desenhoPontoPonto.setSpacing(10);
+		pontos = criarButton("Pontos");
+		retas = criarButton("Retas");
+		circulos = criarButton("Circulos");
+		desenhoPontoPonto.getChildren().addAll(pontos, retas, circulos);
+		return desenhoPontoPonto;
+	}
+
+	private HBox criarSegundaLinha(){
+		desenhoFigura = new HBox();
+		desenhoFigura.setSpacing(10);
+		curvaDragao = criarButton("Cv. Dragão");
+		opcaoGeral = criarButton("Opção Geral");
+		desenhoFigura.getChildren().addAll(curvaDragao, opcaoGeral);
+		return desenhoFigura;
+	}
+
+	private HBox criarTerceiraLinha(){
+		opcoes = new HBox();
+		opcoes.setSpacing(10);
+		limpar = criarButton("Limpar");
+		redesenhar = criarButton("Redesenhar");
+		opcoes.getChildren().addAll(limpar, redesenhar);
+		return opcoes;
+	}
+
+	private HBox criarQuartaLinha(){
+		opcoes2 = new HBox();
+		opcoes2.setSpacing(10);
+		undo = criarButton("Undo");
+		redo = criarButton("Redo");
+		opcoes2.getChildren().addAll(undo, redo);
+		return opcoes2;
+	}
+
+	private Button criarButton(String text){
+		Button btn = new Button(text);
+		btn.setMinHeight(20);
+		btn.setMinWidth(43);
+		btn.setFont(new Font(12));
+		return btn;
+	}
 
 	@SuppressWarnings("restriction")
-	private GridPane montarMenuOpcoesGraficas() {
-		GridPane grid = new GridPane();
-		grid.setPadding(new Insets(5));
-		grid.setHgap(5);
- 
-		// Color Picker
+	private HBox criarOpcaoCor(){
+		HBox hbox = new HBox();
 		ColorPicker colorPicker = new ColorPicker(Color.BLACK);
 		colorPicker.setOnAction(e -> {
 			controladorDeEventos.getDesenhador().setCor(colorPicker.getValue());
 		});
+		hbox.getChildren().addAll(new Label("Cor: "), colorPicker);
+		return hbox;
+	}
 
+	@SuppressWarnings("restriction")
+	private HBox criarOpcaoEspessura(){
+		HBox hbox = new HBox();
 		Spinner<Integer> diametroLinhas = new Spinner<Integer>();
 		SpinnerValueFactory<Integer> diametros = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 20, 2);
 		diametroLinhas.setValueFactory(diametros);
@@ -164,14 +212,8 @@ public class TelaPrincipal {
 		diametroLinhas.valueProperty().addListener(e -> {
 			controladorDeEventos.getDesenhador().setDiametro(diametros.getValue());
 		});
-		
-		
-		grid.add(new Label("Cor: "), 0, 0);
-		grid.add(colorPicker, 1, 0);
-		grid.add(new Label("Espessura: "), 2, 0);
-		grid.add(diametroLinhas, 3, 0);
-
-		return grid;
+		hbox.getChildren().addAll(new Label("Espessura: "), diametroLinhas);
+		return hbox;
 	}
 	
 }

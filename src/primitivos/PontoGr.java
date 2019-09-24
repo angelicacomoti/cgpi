@@ -138,7 +138,7 @@ public class PontoGr extends Ponto {
 
 	}
 
-	private Color getCor() {
+	public Color getCor() {
 		return cor;
 	}
 
