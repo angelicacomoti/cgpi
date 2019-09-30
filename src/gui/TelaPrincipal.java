@@ -40,8 +40,8 @@ public class TelaPrincipal {
 	private Canvas canvasLittle;
 	private ControladorDeEventos controladorDeEventos;
 	
-	public static int LARGURA_CANVAS = 1200;
-	public static int ALTURA_CANVAS = 800;
+	public static int LARGURA_CANVAS = 1220;
+	public static int ALTURA_CANVAS = 700;
 					
 
 	public TelaPrincipal(Stage palco) {
@@ -61,7 +61,7 @@ public class TelaPrincipal {
 		//criando canvas pequeno
 		BorderPane paneLittle = new BorderPane();
 		paneLittle.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
-		canvasLittle = new Canvas(250, 166); // proporçao: divide o maior por 4,8
+		canvasLittle = new Canvas(208, 145); // proporçao: divide o maior por 4,8
 		paneLittle.setCenter(canvasLittle);
 
 		controladorDeEventos = new ControladorDeEventos(canvas, canvasLittle);
@@ -72,6 +72,8 @@ public class TelaPrincipal {
         //Criando Menu
         menu = montarMenuOpcoesButton();
         menu.getChildren().addAll(paneLittle);
+		menu.setMaxWidth(230);
+		menu.setMinWidth(230);
     	        
     	// atributos do painel
         pane.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
@@ -117,10 +119,10 @@ public class TelaPrincipal {
 			controladorDeEventos.redesenharCanvas();
 		});
 		this.undo.setOnAction(e -> {
-			controladorDeEventos.redesenharCanvas();
+			controladorDeEventos.undoLastDesenho();
 		});
 		this.redo.setOnAction(e -> {
-			controladorDeEventos.redesenharCanvas();
+			controladorDeEventos.redoLastDesenho();
 		});
 		
 		// canvas

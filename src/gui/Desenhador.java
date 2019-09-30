@@ -23,7 +23,13 @@ public class Desenhador {
 	private int diametro;
 	private Canvas canvas;
 	private Canvas canvasLittle;
-	private List<ObjetoDesenhado> objetosDesenhados = new ArrayList<ObjetoDesenhado>();
+	private List<ObjetoDesenhado> objetosDesenhados = new ArrayList<>();
+	private List<ObjetoDesenhado> objetosApagados = new ArrayList<>();
+
+	private List<PontoGr> objetoTempFiguraGeral = new ArrayList<>();
+	private List<PontoGr> objetoTempCurvaDragao = new ArrayList<>();
+
+
 	
 	public Desenhador(Canvas canvas, Canvas canvasLittle) {
 		this.diametro = 2;
@@ -92,7 +98,8 @@ public class Desenhador {
 		for(ObjetoDesenhado objeto : objetosDesenhados){
 			for(PontoGr ponto : objeto.getPontos()) {
 				ponto.desenharPonto(canvas.getGraphicsContext2D());
-				PontoGr pontoLittle = new PontoGr((int) Math.floor(ponto.getx()/4.8), (int) Math.floor(ponto.gety()/4.8), ponto.getCor(), "", diametro);
+
+				PontoGr pontoLittle = new PontoGr((int) Math.floor(ponto.getx()/4.8), (int) Math.floor(ponto.gety()/4.8), ponto.getCor(), "", ponto.getDiametro());
 				pontoLittle.desenharPonto(canvasLittle.getGraphicsContext2D());
 			}
 		}
@@ -100,7 +107,12 @@ public class Desenhador {
 
 	private void armazenarObjetoDesenhados(TipoDesenho tipo, List<Ponto> pontos){
 		ObjetoDesenhado desenho = new ObjetoDesenhado(tipo, transformarPontosEmPontosGR(pontos));
-		this.objetosDesenhados.add(desenho);
+		if(tipo.equals(TipoDesenho.OPCAO_GERAL)){
+			this.objetoTempFiguraGeral.addAll(desenho.getPontos());
+		}
+		else{
+			this.objetosDesenhados.add(desenho);
+		}
 	}
 
 	private List<PontoGr> transformarPontosEmPontosGR(List<Ponto> pontos){
@@ -110,4 +122,31 @@ public class Desenhador {
 		}
 		return pontosGr;
 	}
+
+	public void limparObjetosArmazenados(){
+		this.objetosDesenhados = new ArrayList<>();
+	}
+
+	public void popDesenho(){
+		int tamanhoLista = objetosDesenhados.size() - 1;
+		this.objetosApagados.add(objetosDesenhados.get(tamanhoLista));
+		this.objetosDesenhados.remove(tamanhoLista);
+	}
+
+	public void pushDesenho(){
+		int tamanhoLista = objetosApagados.size() - 1;
+		this.objetosDesenhados.add(objetosApagados.get(tamanhoLista));
+		this.objetosApagados.remove(tamanhoLista);
+	}
+
+	public void terminouFiguraGeral(TipoDesenho tipo){
+		ObjetoDesenhado desenho = new ObjetoDesenhado(tipo, this.objetoTempFiguraGeral);
+		this.objetosDesenhados.add(desenho);
+		this.objetoTempFiguraGeral = new ArrayList<>();
+	}
+
+	public void limparCurvaDragaoTemp(){
+		this.objetoTempCurvaDragao = new ArrayList<>();
+	}
+
 }

@@ -27,6 +27,7 @@ public class ControladorDeEventos {
 	private Ponto pontoAtual;
 	private boolean fimDesenho;
 	private Desenhador desenhador;
+	private boolean limpou = false;
 	
 	public ControladorDeEventos(Canvas canvas, Canvas canvasLittle) {
 		super();
@@ -51,6 +52,12 @@ public class ControladorDeEventos {
 	}
 	
 	public void onCanvasMousePressed(MouseEvent event) {
+
+		if(this.limpou){
+			this.limpou = false;
+			this.desenhador.limparObjetosArmazenados();
+		}
+
 		Ponto pontoClicado = new Ponto(event.getX(), event.getY());
 		if (tipoDesenho != null){
 			onCanvasMousePressedDesenho(event, pontoClicado);
@@ -104,8 +111,7 @@ public class ControladorDeEventos {
 	}
 	
 	private void desenharOpcaoGeral(Ponto pontoMedio) {
-		
-		canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
 		int raio = 100;
 
 		List<Circulo> circulosCircunferencia = new ArrayList<>();
@@ -129,6 +135,9 @@ public class ControladorDeEventos {
 
 		List<Reta> retasExtremas2 = determinarRetasExtremas2(pontosExtremos);
 		desenharRetasDesenhoGeral(retasExtremas2);
+
+		this.desenhador.setCor(Color.BLACK);
+		this.desenhador.terminouFiguraGeral(TipoDesenho.OPCAO_GERAL);
 	}
 
 	private List<Ponto> determinarPontos(Ponto pontoMedio, int raio){
@@ -220,7 +229,7 @@ public class ControladorDeEventos {
 	}
 
 	private void desenharCurvaDoDragao() {
-		if (iteracoesCurvaDragao <= 17) {
+		if (iteracoesCurvaDragao <= 14) {
 			preencherCanvasCurvaDoDragao();
 			this.iteracoesCurvaDragao += 1;
 		} else {
@@ -231,8 +240,12 @@ public class ControladorDeEventos {
 	}
 	
 	private void preencherCanvasCurvaDoDragao() {
-		
+
 		canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+		canvasLittle.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+
+		this.desenhador.limparCurvaDragaoTemp();
+
 		Reta reta = new Reta(new Ponto(150, 400), new Ponto(600, 400), this.desenhador.getCor());
 		CurvaDoDragaoCalculador calc = new CurvaDoDragaoCalculador(reta, this.iteracoesCurvaDragao);
 		List<Reta> retasCurvaDragao;
@@ -250,11 +263,13 @@ public class ControladorDeEventos {
 	public void limparCanvas() {
 		canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
 		canvasLittle.getGraphicsContext2D().clearRect(0, 0, canvasLittle.getWidth(), canvasLittle.getHeight());
+		limpou = true;
 		resetCanvas();
 	}
 
 	public void redesenharCanvas() {
 		this.desenhador.desenharObjetosArmaznados();
+		this.limpou = false;
 	}
 
 	public void resetCanvas(){
@@ -262,6 +277,23 @@ public class ControladorDeEventos {
 		pontoAtual = null;
 	}
 
+	public void undoLastDesenho(){
+		this.desenhador.popDesenho();
+
+		canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+		canvasLittle.getGraphicsContext2D().clearRect(0, 0, canvasLittle.getWidth(), canvasLittle.getHeight());
+
+		this.desenhador.desenharObjetosArmaznados();
+	}
+
+	public void redoLastDesenho(){
+		this.desenhador.pushDesenho();
+
+		canvas.getGraphicsContext2D().clearRect(0, 0, canvas.getWidth(), canvas.getHeight());
+		canvasLittle.getGraphicsContext2D().clearRect(0, 0, canvasLittle.getWidth(), canvasLittle.getHeight());
+
+		this.desenhador.desenharObjetosArmaznados();
+	}
 	
 	
 }

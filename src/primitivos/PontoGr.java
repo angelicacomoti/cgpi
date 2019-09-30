@@ -154,7 +154,7 @@ public class PontoGr extends Ponto {
 		return corNomeP;
 	}
 
-	private int getDiametro() {
+	public int getDiametro() {
 		return diametro;
 	}
 
