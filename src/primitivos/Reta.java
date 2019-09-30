@@ -13,7 +13,7 @@ import java.beans.Transient;
 import java.io.Serializable;
 
 /**
- * @author ra00171751 e ra00171752
+ * @author ra00171751 e ra00170552
  */
 
 @SuppressWarnings("restriction")
